@@ -1,41 +1,14 @@
 <?php
 
 use pack\padrao\Services\BaseService;
-
+use pack\padrao\Services\ContractService;
 
 require 'vendor/autoload.php';
+$_ENV['PADRAO_USER'] = 'api-crediok';
+$_ENV['PADRAO_PASS'] = 's2{4ZVY*<-+{Dp?';
 
-const USUARIO = '';
-const SENHA = '';
+$login = new ContractService();
 
-$login = new BaseService();
-
-$retornLogin  = $login->login();
+$retornLogin = $login->getContractList('05626937935', 0);
 
 dump($retornLogin);
-
-//
-//$client = new Client([
-//    // Base URI is used with relative requests
-//    'base_uri' => 'https://wcfcrediokpadrao.azurewebsites.net/WCFCrediok.svc/',
-//    // You can set any number of default request options.
-//    'timeout' => 2.0,
-//    'cookies' => true
-//]);
-//
-//$response = $client->post('Login',
-//    [
-//        GuzzleHttp\RequestOptions::JSON => ['Usuario' => 'api-crediok', 'Senha' => 's2{4ZVY*<-+{Dp?']
-//    ]);
-//
-//
-//$responseProposal = $client->post('ListaDeContrato',
-//    [GuzzleHttp\RequestOptions::JSON => ['CPF' => '05626937935', 'Contrato' => 0, 'DataBase' => 20200513]
-//    ]);
-//
-//$responseProposal;
-//
-//dump($responseProposal);
-
-
-

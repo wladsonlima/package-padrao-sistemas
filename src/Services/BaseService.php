@@ -9,13 +9,13 @@ use pack\padrao\Entities\Login;
 
 use function GuzzleHttp\json_decode;
 
-class BaseService
+abstract class BaseService
 {
 
     /**
      * @var Client $httpClient
      */
-    private $httpClient;
+    protected $httpClient;
 
     public function __construct()
     {
@@ -30,12 +30,13 @@ class BaseService
      * @return mixed
      * @throws \Exception
      */
-    public function login()
+    protected function login()
     {
 
         $loginEntity = new Login();
         $client = $this->httpClient;
         $response = $client->post('Login', [RequestOptions::JSON => $loginEntity->jsonSerialize()]);
+
         return $this->normalizeReturn($response);
     }
 
@@ -54,7 +55,6 @@ class BaseService
                 break;
             case 'Alert':
             case 'OK':
-                $content;
                 return $content;
                 break;
         }
