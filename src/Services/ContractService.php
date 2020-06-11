@@ -17,7 +17,6 @@ class ContractService extends BaseService
      */
     public function getContractList(string $cpf, int $contractNumber)
     {
-
         $contract = new ContractEntity($cpf, $contractNumber);
 
         $this->login();
@@ -26,4 +25,23 @@ class ContractService extends BaseService
         $response = $httpClient->post('ListaDeContrato', [RequestOptions::JSON => $contract->jsonSerialize()]);
         return $this->normalizeReturn($response);
     }
+
+    /**
+     * @param string $cpf
+     * @param int $contractNumber
+     * @return mixed
+     * @throws Exception
+     */
+    public function getContractInstallmentsList(string $cpf, int $contractNumber)
+    {
+        $contract = new ContractEntity($cpf, $contractNumber);
+
+        $this->login();
+
+        $httpClient = $this->httpClient;
+        $response = $httpClient->post('ListaDeContratoPrestacoes', [RequestOptions::JSON => $contract->jsonSerialize()]);
+        return $this->normalizeReturn($response);
+    }
+
+
 }
