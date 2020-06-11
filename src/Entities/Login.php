@@ -12,8 +12,8 @@ class Login implements \JsonSerializable
 
     public function __construct()
     {
-        $this->Usuario = getenv("PADRAO_USER");
-        $this->Senha = getenv("PADRAO_PASS");
+        $this->Usuario = $_ENV["PADRAO_USER"];;
+        $this->Senha = $_ENV["PADRAO_PASS"];;
     }
 
     /**
