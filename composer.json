@@ -2,6 +2,9 @@
     "name": "wladsonlima/package-padrao-sistemas",
     "description": "Pacote de integracao com a Padrao Sistemas",
     "type": "library",
+    "license": [
+        "MIT"
+    ],
     "authors": [
         {
             "name": "Wladson lima",
@@ -9,11 +12,14 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^6.5"
+        "php": "^7.3",
+        "guzzlehttp/guzzle": "^6.5",
+        "symfony/validator": "^5.1",
+        "doctrine/annotations": "^1.10"
     },
     "autoload": {
         "psr-4": {
-            "pack\\padrao\\": "src/"
+            "Pack\\Padrao\\": "src/"
         }
     },
     "require-dev": {

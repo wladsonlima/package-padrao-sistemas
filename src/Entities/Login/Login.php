@@ -1,6 +1,6 @@
 <?php
 
-namespace pack\padrao\Entities;
+namespace Pack\Padrao\Entities\Login;
 
 class Login implements \JsonSerializable
 {
@@ -12,8 +12,8 @@ class Login implements \JsonSerializable
 
     public function __construct()
     {
-        $this->Usuario = $_ENV["PADRAO_USER"];;
-        $this->Senha = $_ENV["PADRAO_PASS"];;
+        $this->Usuario = $_ENV["PADRAO_USER"];
+        $this->Senha = $_ENV["PADRAO_PASS"];
     }
 
     /**

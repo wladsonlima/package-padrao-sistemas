@@ -1,46 +1,50 @@
 <?php
 
-namespace pack\padrao\Services;
+namespace Pack\Padrao\Services;
 
 use Exception;
-use GuzzleHttp\RequestOptions;
-use pack\padrao\Entities\ContractEntity;
+use Pack\Padrao\Entities\Contracts\ContractEntity;
+use Pack\Padrao\Factory\Contracts\ContractsFactory;
+use Pack\Padrao\Helper\CheckerHelper;
 
 class ContractService extends BaseService
 {
 
+
     /**
-     * @param string $cpf
-     * @param int $contractNumber
-     * @return mixed
-     * @throws Exception
+     * @var ContractsFactory
      */
-    public function getContractList(string $cpf, int $contractNumber)
+    private $contractsFactory;
+
+    public function __construct()
     {
-        $contract = new ContractEntity($cpf, $contractNumber);
-
-        $this->login();
-
-        $httpClient = $this->httpClient;
-        $response = $httpClient->post('ListaDeContrato', [RequestOptions::JSON => $contract->jsonSerialize()]);
-        return $this->normalizeReturn($response);
+        $this->contractsFactory = new ContractsFactory(new CheckerHelper());
     }
 
     /**
-     * @param string $cpf
-     * @param int $contractNumber
+     * @param object $json
      * @return mixed
      * @throws Exception
      */
-    public function getContractInstallmentsList(string $cpf, int $contractNumber)
+    public function getContractList(object $json)
     {
-        $contract = new ContractEntity($cpf, $contractNumber);
 
-        $this->login();
+        $entity = $this->contractsFactory->createEntity($json);
 
-        $httpClient = $this->httpClient;
-        $response = $httpClient->post('ListaDeContratoPrestacoes', [RequestOptions::JSON => $contract->jsonSerialize()]);
-        return $this->normalizeReturn($response);
+        if (!$entity instanceof ContractEntity) {
+            if (isset($entity['success']) && !$entity['success']) {
+                return $entity;
+            }
+        }
+
+        $entity;
+
+
+//        $this->login();
+//
+//        $httpClient = $this->httpClient;
+//        $response = $httpClient->post('ListaDeContrato', [RequestOptions::JSON => $contract->jsonSerialize()]);
+//        return $this->normalizeReturn($response);
     }
 
 

@@ -1,11 +1,10 @@
 <?php
 
-namespace pack\padrao\Services;
+namespace Pack\Padrao\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
-use pack\padrao\Entities\Login;
 
 use function GuzzleHttp\json_decode;
 
