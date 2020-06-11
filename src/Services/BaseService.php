@@ -6,9 +6,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
 use pack\padrao\Entities\Login;
+
 use function GuzzleHttp\json_decode;
 
-class  BaseService
+class BaseService
 {
 
     /**
@@ -23,7 +24,6 @@ class  BaseService
             'timeout' => 2.0,
             'cookies' => true
         ]);
-
     }
 
     /**
@@ -44,7 +44,9 @@ class  BaseService
 
         $content = json_decode($response->getBody()->getContents());
 
-        if ($response->getStatusCode() != 200) throw new \Exception($response->getStatusCode());
+        if ($response->getStatusCode() != 200) {
+            throw new \Exception($response->getStatusCode());
+        }
 
         switch ($content->Resposta) {
             case 'Erro':
@@ -55,10 +57,6 @@ class  BaseService
                 $content;
                 return $content;
                 break;
-
         }
-
-
     }
-
 }
